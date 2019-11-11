@@ -21,7 +21,6 @@ class PlayerControlComponentSystem: GKComponentSystem<PlayerControlComponent> {
         } else {
             fatalError("couldn't assign the corrent player control component")
         }
-        
         super.init()
     }
     

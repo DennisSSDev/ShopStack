@@ -37,7 +37,7 @@ class MoveComponent: GKComponent {
     func moveForward() {
     geometryComponent?.geometryNode.physicsBody?.applyForce((geometryComponent?.geometryNode.presentation.worldFront)! * speed, asImpulse: true)
         
-        let velocity = geometryComponent?.geometryNode.physicsBody?.velocity
+        // let velocity = geometryComponent?.geometryNode.physicsBody?.velocity
         // geometryComponent?.geometryNode.physicsBody?.
         /*
         var vel_simd = simd_float3(x: velocity!.x, y: velocity!.y, z: velocity!.z)
