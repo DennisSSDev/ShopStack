@@ -13,6 +13,15 @@
 		CCC418FD2377F89E001A48C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCC418FB2377F89E001A48C6 /* Main.storyboard */; };
 		CCC418FF2377F8A1001A48C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCC418FE2377F8A1001A48C6 /* Assets.xcassets */; };
 		CCC419022377F8A1001A48C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCC419002377F8A1001A48C6 /* LaunchScreen.storyboard */; };
+		CCC4190B2377F905001A48C6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC4190A2377F905001A48C6 /* Game.swift */; };
+		CCC4190D2378C0F7001A48C6 /* GeometryComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC4190C2378C0F7001A48C6 /* GeometryComponent.swift */; };
+		CCC419102378C4AB001A48C6 /* MoveComponentComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC4190F2378C4AB001A48C6 /* MoveComponentComponent.swift */; };
+		CCC419122378CB9A001A48C6 /* PlayerControlComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC419112378CB9A001A48C6 /* PlayerControlComponent.swift */; };
+		CCC419142378D714001A48C6 /* CameraControlComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC419132378D714001A48C6 /* CameraControlComponent.swift */; };
+		CCC419172378E05F001A48C6 /* MakePlayerControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC419162378E05F001A48C6 /* MakePlayerControllerExtension.swift */; };
+		CCC4191A2378F6FC001A48C6 /* PlayerControlSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC419192378F6FC001A48C6 /* PlayerControlSystem.swift */; };
+		CCC4191C2379087F001A48C6 /* SCNVector3Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC4191B2379087F001A48C6 /* SCNVector3Extension.swift */; };
+		CCC4191E23794675001A48C6 /* GamePhysicsHandleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC4191D23794675001A48C6 /* GamePhysicsHandleExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +33,15 @@
 		CCC418FE2377F8A1001A48C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCC419012377F8A1001A48C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCC419032377F8A1001A48C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCC4190A2377F905001A48C6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		CCC4190C2378C0F7001A48C6 /* GeometryComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryComponent.swift; sourceTree = "<group>"; };
+		CCC4190F2378C4AB001A48C6 /* MoveComponentComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveComponentComponent.swift; sourceTree = "<group>"; };
+		CCC419112378CB9A001A48C6 /* PlayerControlComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlComponent.swift; sourceTree = "<group>"; };
+		CCC419132378D714001A48C6 /* CameraControlComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraControlComponent.swift; sourceTree = "<group>"; };
+		CCC419162378E05F001A48C6 /* MakePlayerControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePlayerControllerExtension.swift; sourceTree = "<group>"; };
+		CCC419192378F6FC001A48C6 /* PlayerControlSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlSystem.swift; sourceTree = "<group>"; };
+		CCC4191B2379087F001A48C6 /* SCNVector3Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Extension.swift; sourceTree = "<group>"; };
+		CCC4191D23794675001A48C6 /* GamePhysicsHandleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePhysicsHandleExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +74,9 @@
 		CCC418F42377F89E001A48C6 /* ShopStack */ = {
 			isa = PBXGroup;
 			children = (
+				CCC419182378F6E7001A48C6 /* Systems */,
+				CCC419152378E01C001A48C6 /* Extensions */,
+				CCC419092377F8B5001A48C6 /* Components */,
 				CCC418F52377F89E001A48C6 /* AppDelegate.swift */,
 				CCC418F72377F89E001A48C6 /* art.scnassets */,
 				CCC418F92377F89E001A48C6 /* GameViewController.swift */,
@@ -63,8 +84,38 @@
 				CCC418FE2377F8A1001A48C6 /* Assets.xcassets */,
 				CCC419002377F8A1001A48C6 /* LaunchScreen.storyboard */,
 				CCC419032377F8A1001A48C6 /* Info.plist */,
+				CCC4190A2377F905001A48C6 /* Game.swift */,
 			);
 			path = ShopStack;
+			sourceTree = "<group>";
+		};
+		CCC419092377F8B5001A48C6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CCC4190C2378C0F7001A48C6 /* GeometryComponent.swift */,
+				CCC4190F2378C4AB001A48C6 /* MoveComponentComponent.swift */,
+				CCC419112378CB9A001A48C6 /* PlayerControlComponent.swift */,
+				CCC419132378D714001A48C6 /* CameraControlComponent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		CCC419152378E01C001A48C6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CCC419162378E05F001A48C6 /* MakePlayerControllerExtension.swift */,
+				CCC4191B2379087F001A48C6 /* SCNVector3Extension.swift */,
+				CCC4191D23794675001A48C6 /* GamePhysicsHandleExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CCC419182378F6E7001A48C6 /* Systems */ = {
+			isa = PBXGroup;
+			children = (
+				CCC419192378F6FC001A48C6 /* PlayerControlSystem.swift */,
+			);
+			path = Systems;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +191,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCC418FA2377F89E001A48C6 /* GameViewController.swift in Sources */,
+				CCC4191C2379087F001A48C6 /* SCNVector3Extension.swift in Sources */,
+				CCC4190D2378C0F7001A48C6 /* GeometryComponent.swift in Sources */,
+				CCC4190B2377F905001A48C6 /* Game.swift in Sources */,
+				CCC419102378C4AB001A48C6 /* MoveComponentComponent.swift in Sources */,
+				CCC4191A2378F6FC001A48C6 /* PlayerControlSystem.swift in Sources */,
+				CCC419172378E05F001A48C6 /* MakePlayerControllerExtension.swift in Sources */,
+				CCC419142378D714001A48C6 /* CameraControlComponent.swift in Sources */,
+				CCC4191E23794675001A48C6 /* GamePhysicsHandleExtension.swift in Sources */,
 				CCC418F62377F89E001A48C6 /* AppDelegate.swift in Sources */,
+				CCC419122378CB9A001A48C6 /* PlayerControlComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
