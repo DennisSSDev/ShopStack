@@ -19,8 +19,8 @@ class MoveComponent: GKComponent {
     
     var speed: Float = 0.05
     var speedThreshold: Float = 5
-    var leftRotation = SCNVector4Make(0, -0.02, 0, 1)
-    var rightRotation = SCNVector4Make(0, 0.02, 0, 1)
+    var leftRotation = SCNVector4Make(0, -0.035, 0, 1)
+    var rightRotation = SCNVector4Make(0, 0.035, 0, 1)
     
     func rotateDirectionRight() {
         geometryComponent?.geometryNode.physicsBody?.applyTorque(leftRotation, asImpulse: true)
