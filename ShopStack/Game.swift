@@ -18,27 +18,51 @@ class Game: NSObject, SCNSceneRendererDelegate {
     /// Holds all the entities, so they won't be deallocated.
     var entities = [GKEntity]()
     
+    // which menu view is the camera on right now
+    var activeViewLocation = 1
+    let cameraMoveToLocations = [
+        SCNVector3(-19, 6.2, 38),
+        SCNVector3(-1.4, 6.2, 38),
+        SCNVector3(18.5, 6.5, 46)
+    ]
+    
     /// Keeps track of the time for use in the update method.
     var previousUpdateTime: TimeInterval = 0
     
+    var globalCamera: SCNNode = SCNNode()
+    
     var playerControlSystem: PlayerControlComponentSystem!
+    
+    var playerScoreSystem: PlayerScoreComponentSystem!
     
     var updateSystems = [
         GKComponentSystem(componentClass: CameraControlComponent.self),
         GKComponentSystem(componentClass: MoveComponent.self),
+        GKComponentSystem(componentClass: TrayComponent.self),
     ]
+    
+    var pressedStart = false
     
     // MARK: Initialization
     
     override init() {
         super.init()
         
+        guard let camera = scene.rootNode.childNode(withName: "camera", recursively: false) else {
+            return
+        }
+        
+        globalCamera = camera
+        
         setUpEntities()
         setupUpdateSystems()
         
         self.playerControlSystem = PlayerControlComponentSystem(fromComponentIn: entities[0])
+        self.playerScoreSystem = PlayerScoreComponentSystem(entities[0].component(ofType: PlayerScoreComponent.self)!)
         
         scene.physicsWorld.contactDelegate = self
+        
+        
     }
     
     /**
@@ -66,11 +90,18 @@ class Game: NSObject, SCNSceneRendererDelegate {
     func renderer(_: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // Calculate the time change since the previous update.
         let timeSincePreviousUpdate = time - previousUpdateTime
+        // Update the previous update time to keep future calculations accurate.
+        previousUpdateTime = time
+        
+        // don't run the systems until the game started
+        if !pressedStart {
+             return
+        }
+        
         for sys in updateSystems {
             sys.update(deltaTime: timeSincePreviousUpdate)
         }
         playerControlSystem.update(deltaTime: timeSincePreviousUpdate)
-        // Update the previous update time to keep future calculations accurate.
-        previousUpdateTime = time
+        playerScoreSystem.update(deltaTime: timeSincePreviousUpdate)
     }
 }

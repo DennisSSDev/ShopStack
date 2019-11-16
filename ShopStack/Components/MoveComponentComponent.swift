@@ -35,18 +35,7 @@ class MoveComponent: GKComponent {
     
     /// Tells this entity's geometry component to move forward constantly based on physics movement
     func moveForward() {
-    geometryComponent?.geometryNode.physicsBody?.applyForce((geometryComponent?.geometryNode.presentation.worldFront)! * speed, asImpulse: true)
-        
-        // let velocity = geometryComponent?.geometryNode.physicsBody?.velocity
-        // geometryComponent?.geometryNode.physicsBody?.
-        /*
-        var vel_simd = simd_float3(x: velocity!.x, y: velocity!.y, z: velocity!.z)
-        let lengthSqrd = simd_length_squared(vel_simd)
-        if lengthSqrd > speedThreshold {
-            vel_simd = simd_normalize(vel_simd)
-            vel_simd *= speedThreshold / 2
-            geometryComponent?.geometryNode.physicsBody?.velocity = SCNVector3(vel_simd)
-        }*/
+        geometryComponent?.geometryNode.physicsBody?.applyForce((geometryComponent?.geometryNode.presentation.worldFront)! * speed, asImpulse: true)
     }
     
     override func update(deltaTime seconds: TimeInterval) {

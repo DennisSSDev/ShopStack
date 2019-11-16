@@ -48,6 +48,10 @@ extension SCNVector3
         return sqrtf(x*x + y*y + z*z)
     }
     
+    func lengthSqrd() -> Float {
+        return (x*x + y*y + z*z)
+    }
+    
     /**
     * Normalizes the vector described by the SCNVector3 to length 1.0 and returns
     * the result as a new SCNVector3.
@@ -69,6 +73,10 @@ extension SCNVector3
     */
     func distance(vector: SCNVector3) -> Float {
         return (self - vector).length()
+    }
+    
+    func distanceSqrd(vector: SCNVector3) -> Float {
+        return (self - vector).lengthSqrd();
     }
     
     /**
