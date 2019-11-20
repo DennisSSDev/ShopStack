@@ -24,7 +24,7 @@ extension Game: SCNPhysicsContactDelegate {
         }
         // hit a bouncing wall
         if other.categoryBitMask == 2 {
-            let bounce = contact.contactNormal.normalized() * -10.15
+            let bounce = contact.contactNormal.normalized() * -750.0 * Float(world.timeStep)
             player.physicsBody?.applyForce(bounce, asImpulse: false)
             // since the player hit a bounce wall -> attempt to drop the contents
             self.playerScoreSystem.tryDropNodes()

@@ -17,7 +17,7 @@ class MoveComponent: GKComponent {
         return entity?.component(ofType: GeometryComponent.self)
     }
     
-    var speed: Float = 0.05
+    var speed: Float = 3
     var speedThreshold: Float = 5
     var leftRotation = SCNVector4Make(0, -0.035, 0, 1)
     var rightRotation = SCNVector4Make(0, 0.035, 0, 1)
@@ -34,11 +34,11 @@ class MoveComponent: GKComponent {
     // MARK: Methods
     
     /// Tells this entity's geometry component to move forward constantly based on physics movement
-    func moveForward() {
-        geometryComponent?.geometryNode.physicsBody?.applyForce((geometryComponent?.geometryNode.presentation.worldFront)! * speed, asImpulse: true)
+    func moveForward(deltaTime seconds: TimeInterval) {
+        geometryComponent?.geometryNode.physicsBody?.applyForce((geometryComponent?.geometryNode.presentation.worldFront)! * speed * Float(seconds), asImpulse: true)
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-       moveForward()
+       moveForward(deltaTime: seconds)
     }
 }
