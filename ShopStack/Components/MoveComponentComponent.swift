@@ -17,7 +17,7 @@ class MoveComponent: GKComponent {
         return entity?.component(ofType: GeometryComponent.self)
     }
     
-    var speed: Float = 3
+    var speed: Float = 3.5
     var speedThreshold: Float = 5
     var leftRotation = SCNVector4Make(0, -0.035, 0, 1)
     var rightRotation = SCNVector4Make(0, 0.035, 0, 1)
