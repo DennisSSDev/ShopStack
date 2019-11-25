@@ -50,6 +50,10 @@ class PlayerControlComponent: GKComponent {
         bTurnRight = false;
     }
     
+    func jump() {
+        moveComponent?.jump()
+    }
+    
     override func update(deltaTime seconds: TimeInterval) {
         if(bTurnLeft) {
             turnLeft()

@@ -41,5 +41,10 @@ extension Game: SCNPhysicsContactDelegate {
             self.playerScoreSystem.storeNode(other)
             return
         }
+        if other.categoryBitMask == 16 {
+            let bounce = contact.contactNormal.normalized() * -1000.0 * Float(world.timeStep)
+            player.physicsBody?.applyForce(bounce, asImpulse: false)
+            self.playerScoreSystem.scorePoints()
+        }
     }
 }

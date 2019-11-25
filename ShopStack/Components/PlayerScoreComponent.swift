@@ -51,6 +51,11 @@ class PlayerScoreComponent: GKComponent {
                 result += 3
             }
         }
+        // todo: return the storedNodes to the market
+        for node in storedNodes {
+            node.worldPosition = SCNVector3(Int.random(in: -35...24), 10, Int.random(in: -60 ... -42))
+            node.physicsBody?.contactTestBitMask = 1
+        }
         storedNodes = []
         score += result
     }

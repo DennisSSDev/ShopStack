@@ -19,8 +19,10 @@ class MoveComponent: GKComponent {
     
     var speed: Float = 3.5
     var speedThreshold: Float = 5
-    var leftRotation = SCNVector4Make(0, -0.035, 0, 1)
-    var rightRotation = SCNVector4Make(0, 0.035, 0, 1)
+    var leftRotation = SCNVector4Make(0, -0.045, 0, 1)
+    var rightRotation = SCNVector4Make(0, 0.045, 0, 1)
+    let upward = SCNVector3(0, 1, 0)
+    let jumpStrength: Float = 3
     
     func rotateDirectionRight() {
         geometryComponent?.geometryNode.physicsBody?.applyTorque(leftRotation, asImpulse: true)
@@ -28,6 +30,10 @@ class MoveComponent: GKComponent {
     
     func rotateDirectionLeft() {
         geometryComponent?.geometryNode.physicsBody?.applyTorque(rightRotation, asImpulse: true)
+    }
+    
+    func jump() {
+        geometryComponent?.geometryNode.physicsBody?.applyForce(upward * jumpStrength, asImpulse: true)
     }
     
     
@@ -40,5 +46,13 @@ class MoveComponent: GKComponent {
     
     override func update(deltaTime seconds: TimeInterval) {
        moveForward(deltaTime: seconds)
+        if let yComponent = geometryComponent?.geometryNode.presentation.worldUp.y {
+           if let yPos = geometryComponent?.geometryNode.presentation.worldPosition.y {
+            if yComponent < Float(0.0) && yPos < Float(0.5) {
+                // you flipped over reset player
+                geometryComponent?.geometryNode.physicsBody?.resetTransform()
+            }
+            }
+        }
     }
 }

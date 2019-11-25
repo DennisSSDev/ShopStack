@@ -36,6 +36,10 @@ class PlayerControlComponentSystem: GKComponentSystem<PlayerControlComponent> {
         playerControlComponent.stopTurning()
     }
     
+    func jump() {
+        playerControlComponent.jump();
+    }
+    
     override func update(deltaTime seconds: TimeInterval) {
         playerControlComponent.update(deltaTime: seconds)
     }

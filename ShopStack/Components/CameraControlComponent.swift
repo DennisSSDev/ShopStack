@@ -31,7 +31,7 @@ class CameraControlComponent: GKComponent {
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
         // follow target
-        let targetPos = SCNVector3(targetNode.presentation.position.x, targetNode.presentation.position.y + 19, targetNode.presentation.position.z-17)
+        let targetPos = SCNVector3(targetNode.presentation.position.x, targetNode.presentation.position.y + 25, targetNode.presentation.position.z-13)
         let cameraPosition = cameraNode.position
         
         let camDamping: Float = 0.3

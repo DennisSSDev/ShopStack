@@ -46,6 +46,7 @@ class Game: NSObject, SCNSceneRendererDelegate {
     // MARK: Initialization
     
     override init() {
+        
         super.init()
         
         guard let camera = scene.rootNode.childNode(withName: "camera", recursively: false) else {
@@ -61,8 +62,6 @@ class Game: NSObject, SCNSceneRendererDelegate {
         self.playerScoreSystem = PlayerScoreComponentSystem(entities[0].component(ofType: PlayerScoreComponent.self)!)
         
         scene.physicsWorld.contactDelegate = self
-        
-        
     }
     
     /**
