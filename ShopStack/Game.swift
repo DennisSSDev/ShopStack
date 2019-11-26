@@ -18,6 +18,16 @@ class Game: NSObject, SCNSceneRendererDelegate {
     /// Holds all the entities, so they won't be deallocated.
     var entities = [GKEntity]()
     
+    /// on screen values
+    var timer: SCNText = SCNText()
+    var timerNode: SCNNode = SCNNode()
+    var weight: SCNText = SCNText()
+    var weightNode: SCNNode = SCNNode()
+    var score: SCNText = SCNText()
+    var scoreNode: SCNNode = SCNNode()
+    
+    var gameOverScreen: SCNNode = SCNNode()
+    
     // which menu view is the camera on right now
     var activeViewLocation = 1
     let cameraMoveToLocations = [
@@ -46,15 +56,9 @@ class Game: NSObject, SCNSceneRendererDelegate {
     // MARK: Initialization
     
     override init() {
-        
         super.init()
         
-        guard let camera = scene.rootNode.childNode(withName: "camera", recursively: false) else {
-            return
-        }
-        
-        globalCamera = camera
-        
+        setupGlobals()
         setUpEntities()
         setupUpdateSystems()
         
@@ -72,6 +76,40 @@ class Game: NSObject, SCNSceneRendererDelegate {
             fatalError("Failed to create a player Entity")
         }
         entities.append(playerEntity)
+    }
+    
+    func setupGlobals() {
+        guard let camera = scene.rootNode.childNode(withName: "camera", recursively: false) else {
+            return
+        }
+        globalCamera = camera
+
+        guard let timer = scene.rootNode.childNode(withName: "Timer", recursively: true) else {
+            return
+        }
+        timerNode = timer
+        timerNode.isHidden = true
+        self.timer = timer.geometry as! SCNText
+        
+        guard let weight = scene.rootNode.childNode(withName: "Weight", recursively: true) else {
+            return
+        }
+        weightNode = weight
+        weightNode.isHidden = true
+        self.weight = weight.geometry as! SCNText
+        
+        guard let score = scene.rootNode.childNode(withName: "Score", recursively: true) else {
+            return
+        }
+        scoreNode = score
+        scoreNode.isHidden = true
+        self.score = score.geometry as! SCNText
+        
+        guard let gameOver = scene.rootNode.childNode(withName: "gameover", recursively: true) else {
+            return
+        }
+        gameOverScreen = gameOver
+        gameOverScreen.isHidden = true
     }
     
     func setupUpdateSystems() {

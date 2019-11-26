@@ -10,16 +10,24 @@ import UIKit
 import QuartzCore
 import SceneKit
 
+// todo: add the observer to detect when the game is over
 class GameViewController: UIViewController {
     
-    let game = Game() // game handler & physics delegate
+    var game: Game! // game handler & physics delegate
     var controlSystem: PlayerControlComponentSystem!
     var scnView: SCNView! // active scene
-    
+    // timer values
+    var minutes = 0
+    var seconds = 5
     var allGestures: [UIGestureRecognizer] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        game = Game()
+        minutes = 1
+        seconds = 59
+        allGestures = []
         
         // retrieve the active scene view
         scnView = (self.view as! SCNView)
@@ -37,7 +45,7 @@ class GameViewController: UIViewController {
         scnView.showsStatistics = true
     
         // enable swipe recognition
-        addSwipe(view: scnView)
+        addSwipe()
         
         scnView.audioListener = game.globalCamera
         let bckLoop = SCNAudioSource(fileNamed: "BraveWorld.wav")
@@ -48,26 +56,32 @@ class GameViewController: UIViewController {
         let musicPlayer = SCNAudioPlayer(source: bckLoop!)
         game.globalCamera.addAudioPlayer(musicPlayer)
         
-        // enable tap recognition
-        let tapGesture = UITapGestureRecognizer()
-        tapGesture.numberOfTapsRequired = 1
-        tapGesture.numberOfTouchesRequired = 1
-        tapGesture.addTarget(self, action: #selector(sceneViewTapped(sender:)))
-        scnView.addGestureRecognizer(tapGesture)
-        allGestures.append(tapGesture)
+        addMenuTap()
     }
     
     // MARK: - Helpers
     
     /// helper function for adding the swiping detection to the scene view
-    func addSwipe(view: SCNView) {
+    func addSwipe() {
         let directions: [UISwipeGestureRecognizer.Direction] = [.right, .left]
         for direction in directions {
             let gesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
             gesture.direction = direction
             allGestures.append(gesture)
-            view.addGestureRecognizer(gesture)
+            scnView.addGestureRecognizer(gesture)
         }
+    }
+    
+    func addMenuTap() {
+        DispatchQueue.main.async(execute: {
+            // enable tap recognition
+            let tapGesture = UITapGestureRecognizer()
+            tapGesture.numberOfTapsRequired = 1
+            tapGesture.numberOfTouchesRequired = 1
+            tapGesture.addTarget(self, action: #selector(self.sceneViewTapped(sender:)))
+            self.scnView.addGestureRecognizer(tapGesture)
+            self.allGestures.append(tapGesture)
+        })
     }
     
     // MARK: Post Play Button Init
@@ -103,8 +117,44 @@ class GameViewController: UIViewController {
             return
         }
         UI.isHidden = true
+        
+        game.timerNode.isHidden = false
+        game.weightNode.isHidden = false
+        game.scoreNode.isHidden = false
         // begin the game
         game.pressedStart = true
+        
+        // timer
+        let action = SCNAction.repeatForever(SCNAction.sequence([
+            SCNAction.run({_ in
+                self.decreaseTimer()
+            }),
+            SCNAction.wait(duration: 1.0)
+        ]))
+        game.scene.rootNode.runAction(action)
+        game.beginUIUpdate()
+    }
+    
+    func decreaseTimer() {
+        seconds -= 1
+        if(seconds <= 0) {
+            if(minutes == 0) {
+                gameOver()
+            } else {
+                minutes -= 1
+                seconds = 59
+            }
+        }
+        game.timer.string = "0\(minutes):\(seconds<10 ? "0" : "")\(seconds)"
+    }
+    
+    func gameOver() {
+        game.gameOverScreen.isHidden = false
+        game.timerNode.isHidden = true
+        game.weightNode.isHidden = true
+        game.scoreNode.isHidden = true
+        game.scene.rootNode.removeAllActions()
+        addMenuTap()
     }
     
     // MARK: - Gesture Handlers
@@ -142,9 +192,6 @@ class GameViewController: UIViewController {
     
     /// handler for tapping the scene view. Mainly used to detect a button press on the play button
     @objc func sceneViewTapped(sender: UITapGestureRecognizer) {
-        if game.pressedStart {
-            return
-        }
         
         let loc = sender.location(in: scnView)
         
@@ -153,9 +200,12 @@ class GameViewController: UIViewController {
             return
         }
         let result = hitResults.first
+        
         if let node = result?.node {
             if node.name == "PlayButton" || node.name == "button" {
                 beginGame()
+            } else if node.name == "RestartButton" {
+                self.viewDidLoad()
             }
         }
     }
