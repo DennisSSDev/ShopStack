@@ -10,10 +10,11 @@ import SceneKit
 import GameplayKit
 
 extension Game {
+    /// failure function
     private func nodeLoadFailure(targetName: String) {
         fatalError("Making box with name \(targetName) failed because the GameScene scene file contains no nodes with that name.")
     }
-    
+    /// helper function to generate a player
     func makePlayerController(boxName: String, cameraName:  String) -> GKEntity? {
         let player = GKEntity()
         

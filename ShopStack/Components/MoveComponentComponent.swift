@@ -9,6 +9,7 @@
 import GameplayKit
 import SceneKit
  
+/// component for allowing an entity to move
 class MoveComponent: GKComponent {
     // MARK: Properties
  

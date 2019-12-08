@@ -25,7 +25,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         game = Game()
-        minutes = 1
+        minutes = 9
         seconds = 59
         allGestures = []
         
@@ -42,7 +42,7 @@ class GameViewController: UIViewController {
         controlSystem = game.playerControlSystem
         
         // show statistics such as fps and timing information
-        scnView.showsStatistics = true
+        scnView.showsStatistics = false
     
         // enable swipe recognition
         addSwipe()
@@ -118,9 +118,11 @@ class GameViewController: UIViewController {
         }
         UI.isHidden = true
         
+        // hide the gameplay realted UI
         game.timerNode.isHidden = false
         game.weightNode.isHidden = false
         game.scoreNode.isHidden = false
+        
         // begin the game
         game.pressedStart = true
         

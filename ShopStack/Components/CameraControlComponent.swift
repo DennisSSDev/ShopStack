@@ -9,6 +9,7 @@
 import GameplayKit
 import SceneKit
  
+/// component allowing the entity to move it's camera component to a particular direction and keep focus on target
 class CameraControlComponent: GKComponent {
     // MARK: Properties
  

@@ -9,6 +9,7 @@
 import SceneKit
 import GameplayKit
 
+/// system for keeping track of the player score data, weight and items held in the basket
 class PlayerScoreComponentSystem: GKComponentSystem<PlayerScoreComponent> {
     
     var playerScoreComponent: PlayerScoreComponent!

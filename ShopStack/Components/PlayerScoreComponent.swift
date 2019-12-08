@@ -9,7 +9,7 @@
 import SceneKit
 import GameplayKit
  
-// class to store geometry data of a node
+/// component to store the carts data such as weight, score, items in cart and apply manipulations on them
 class PlayerScoreComponent: GKComponent {
     // MARK: Properties
     

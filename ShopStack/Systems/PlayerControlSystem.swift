@@ -9,6 +9,7 @@
 import SceneKit
 import GameplayKit
 
+/// system to hadle player input
 class PlayerControlComponentSystem: GKComponentSystem<PlayerControlComponent> {
     
     var playerControlComponent: PlayerControlComponent

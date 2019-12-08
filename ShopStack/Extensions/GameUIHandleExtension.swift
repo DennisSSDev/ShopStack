@@ -9,6 +9,7 @@
 import SceneKit
 import GameplayKit
 
+/// extension to handle ui updates on a separate thread
 extension Game {
     
     func updateWeightUI() {

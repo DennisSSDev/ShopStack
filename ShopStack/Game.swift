@@ -9,6 +9,7 @@
 import SceneKit
 import GameplayKit
  
+/// main game. Initialization and creation of components, systems, player, etc happens here
 class Game: NSObject, SCNSceneRendererDelegate {
     // MARK: Properties
     

@@ -9,7 +9,7 @@
 import SceneKit
 import GameplayKit
  
-// class to store all 4 sides of the tray for collision purposes
+/// class to store all 4 sides of the cart tray for collision purposes
 class TrayComponent: GKComponent {
     // MARK: Properties
     

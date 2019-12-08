@@ -9,6 +9,7 @@
 import GameplayKit
 import SceneKit
  
+/// component allowing it to become a player and controllable
 class PlayerControlComponent: GKComponent {
     // MARK: Properties
  

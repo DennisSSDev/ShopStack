@@ -9,7 +9,7 @@
 import SceneKit
 import GameplayKit
  
-// class to store geometry data of a node
+/// class to store geometry data of a node
 class GeometryComponent: GKComponent {
     // MARK: Properties
     

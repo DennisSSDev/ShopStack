@@ -9,6 +9,7 @@
 import Foundation
 import SceneKit
 
+/// extending the phyisics delelegate to be my custom class to handle specific collision events
 extension Game: SCNPhysicsContactDelegate {
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
@@ -24,7 +25,7 @@ extension Game: SCNPhysicsContactDelegate {
         }
         // hit a bouncing wall
         if other.categoryBitMask == 2 {
-            let bounce = contact.contactNormal.normalized() * -750.0 * Float(world.timeStep)
+            let bounce = contact.contactNormal.normalized() * -700.0 * Float(world.timeStep)
             player.physicsBody?.applyForce(bounce, asImpulse: false)
             // since the player hit a bounce wall -> attempt to drop the contents
             self.playerScoreSystem.tryDropNodes()
@@ -35,12 +36,13 @@ extension Game: SCNPhysicsContactDelegate {
             other.physicsBody?.angularVelocity = SCNVector4Zero
             other.physicsBody?.contactTestBitMask = 0
             other.physicsBody?.isAffectedByGravity = true
-            other.worldPosition = player.presentation.worldPosition + SCNVector3(0, 1.2, 0)
+            other.worldPosition = player.presentation.worldPosition + player.presentation.worldFront + SCNVector3(0, 1, 0)
             other.rotation = player.presentation.rotation
             
             self.playerScoreSystem.storeNode(other)
             return
         }
+        // hit one of the tubes to score points
         if other.categoryBitMask == 16 {
             let bounce = contact.contactNormal.normalized() * -1000.0 * Float(world.timeStep)
             player.physicsBody?.applyForce(bounce, asImpulse: false)
